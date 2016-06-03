@@ -1,8 +1,6 @@
 TEMPLATE = app
 CONFIG = ""
 
-SOURCES += main.c
-
 # Change this to match your AVR microcontroller's part number
 MCU = atmega328p
 #Comment the following line (using #) if you don't want to upload the output '.hex' file after building
@@ -132,3 +130,6 @@ first.depends = avr_write_fuses
 QMAKE_EXTRA_TARGETS += first avr_strip avr_gen_hex avr_eeprom avr_gen_lst avr_prntsize\
  avr_upload avr_write_fuses avr_write_eeprom
 #message("All done. Have fun with make")
+
+SOURCES += \
+    main.c
