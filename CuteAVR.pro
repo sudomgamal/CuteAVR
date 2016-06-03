@@ -5,14 +5,28 @@ SOURCES += main.c
 
 # Change this to match your AVR microcontroller's part number
 MCU = atmega328p
-#Comment this line (using #) if you don't want to upload the output '.hex' file after building
+#Comment the following line (using #) if you don't want to upload the output '.hex' file after building
 CONFIG += upload_hex
+#Comment the following (using #) if you don't want to upload the output '.hex' file after building
+CONFIG += write_eeprom
+
+#Comment the following line (using #) if you don't want to upload the output '.hex' file after building
+#CONFIG += write_fuses
+#set the fuses
+#LFUSE = ""
+#HFUSE = ""
+#EFUSE = ""
+
 #set the avr-gcc toolchain directory
 AVR_TOOLCHAIN_DIR = "C:/Program Files (x86)/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain"
 #set the uploader (avrdude) directory
 UPLOADER_DIR = C:\Arduino\hardware\tools\avr\bin
 #specify the serial port to which the programmer is connected
 UPLOADER_PORT = COM2
+#set the baud rate
+UPLOADER_BAUD = 115200
+#set the programmer
+UPLOADER_PROGRAMMER = arduino
 #set optimization level *avr-gcc oprimazations levels can be one of (0, 1, 2, s)*
 COMPILER_OPTIMATZTION_LEVEL = 1
 #Comment this line (using #) if you don't care to watch avr programs work
@@ -47,11 +61,9 @@ AVRSIZE     = @echo "-----------------------------------------------------------
 
 #setup the upload tool (avrdude)
 UPLOADER = $${UPLOADER_DIR}\avrdude.exe
-UPLOADER_BAUD = 115200
-UPLOADER_PROGRAMMER = arduino
 UPLOADER_PARTNO = $$MCU
-UPLOADER_ARGS = -c$$UPLOADER_PROGRAMMER -P$$UPLOADER_PORT -b$$UPLOADER_BAUD -p$$UPLOADER_PARTNO \
--Uflash:w:"$$OUTPUT_HEX":i
+UPLOADER_ARGS = -c$$UPLOADER_PROGRAMMER -P$$UPLOADER_PORT -b$$UPLOADER_BAUD -p$$UPLOADER_PARTNO
+UPLOADER_FLASH = -Uflash:w:"$$OUTPUT_HEX":i
 
 # C compiler flags
 CSTANDARD   = "-std=gnu99"
@@ -97,14 +109,26 @@ avr_prntsize.target = .prntsize
 avr_prntsize.commands = $$AVRSIZE $$OUTPUT_ELF
 avr_prntsize.depends = avr_gen_lst
 
-upload_hex {
 avr_upload.target = .avr_upload
 avr_upload.depends = avr_prntsize
-avr_upload.commands = "$$UPLOADER $$UPLOADER_ARGS"
-first.depends = avr_upload
-} else {
-first.depends = avr_prntsize
+upload_hex {
+avr_upload.commands = "$$UPLOADER $$UPLOADER_ARGS $$UPLOADER_FLASH"
 }
 
-QMAKE_EXTRA_TARGETS += first avr_strip avr_gen_hex avr_eeprom avr_gen_lst avr_prntsize avr_upload
+avr_write_eeprom.target = .avr_write_eeprom
+avr_write_eeprom.depends = avr_upload
+write_eeprom {
+avr_write_eeprom.commands = "$$UPLOADER $$UPLOADER_ARGS  $$UPLOADER_EEPROM"
+}
+
+avr_write_fuses.target = .avr_write_fuses
+avr_write_fuses.depends = avr_write_eeprom
+write_eeprom {
+avr_write_fuses.commands = "$$UPLOADER $$UPLOADER_ARGS $$UPLOADER_FUSES"
+}
+
+
+first.depends = avr_write_fuses
+QMAKE_EXTRA_TARGETS += first avr_strip avr_gen_hex avr_eeprom avr_gen_lst avr_prntsize\
+ avr_upload avr_write_fuses avr_write_eeprom
 #message("All done. Have fun with make")
