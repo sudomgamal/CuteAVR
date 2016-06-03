@@ -1,14 +1,12 @@
 TEMPLATE = app
 CONFIG = ""
 
-SOURCES += main.c
-
 # Change this to match your AVR microcontroller's part number
 MCU = atmega328p
 #Comment this line (using #) if you don't want to upload the output '.hex' file after building
 CONFIG += upload_hex
-#set the avr-gcc toolchain directory
-AVR_TOOLCHAIN_DIR = "C:/Program Files (x86)/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain"
+#set the avr-gnu toolchain directory (dont use a path with spaces in it)
+AVR_TOOLCHAIN_DIR = ""
 #set the uploader (avrdude) directory
 UPLOADER_DIR = C:\Arduino\hardware\tools\avr\bin
 #specify the serial port to which the programmer is connected
@@ -34,16 +32,17 @@ OUTPUT_LST = $${TARGET}.lss
 OUTPUT_EEP = $${TARGET}.eep
 
 #toolchain setup
-AVR_LIB_DIR       = $$AVR_TOOLCHAIN_DIR/avr/lib
-AVR_INC_DIR       = $$AVR_TOOLCHAIN_DIR/avr/include
-AVRC        = avr-gcc
-AVRCXX      = avr-g++
-AVR_LINKER  = avr-gcc
-AVRSTRIP    = $${VERBOS}avr-strip
-AVROBJCPY   = $${VERBOS}avr-objcopy
-AVROBJDUMP  = $${VERBOS}avr-objdump
+AVR_LIB_DIR = $$AVR_TOOLCHAIN_DIR/avr/lib
+AVR_INC_DIR = $$AVR_TOOLCHAIN_DIR/avr/include
+
+AVRC        = "$$AVR_TOOLCHAIN_DIR/bin/avr-gcc"
+AVRCXX      = "$$AVR_TOOLCHAIN_DIR/bin/avr-g++"
+AVR_LINKER  = "$$AVR_TOOLCHAIN_DIR/bin/avr-gcc"
+AVRSTRIP    = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-strip"
+AVROBJCPY   = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-objcopy"
+AVROBJDUMP  = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-objdump"
 AVRSIZE     = @echo "---------------------------------------------------------------" && \
-@echo "Size of each section (bytes):" && $${VERBOS}avr-size
+@echo "Size of each section (bytes):" && "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-size"
 
 #setup the upload tool (avrdude)
 UPLOADER = $${UPLOADER_DIR}\avrdude.exe
