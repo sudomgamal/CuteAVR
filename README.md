@@ -22,3 +22,4 @@ This is a list of some important qmake variables and configuration directives th
  4. **UPLOADER_DIR = ""**: use this qmake variable to tell qmake where your uploader (avrdude) binary lives in your system.
  5. **UPLOADER_PORT = ""**: Tell qmake you're connecting your programmer to which port.
 
+***Note: This has been only tested on Windows OS, but it should work on other operating systems (GNU/Linux and others) too***
