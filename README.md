@@ -18,7 +18,7 @@ The main file in this repository is [CuteAVR.pro](https://github.com/eng-mg/Cute
 This is a list of some important qmake variables and configuration directives that you need to worry about before building the project. Most of these configurations need to be set only once and don't change 
  1. **MCU = atmega328p**: set the variable MCU to the part number of the AVR microcontroller you're using. (atmega328p is the default).
  2. **CONFIG += upload_hex**: This line is used to tell qmake to generate an *upload step* after building the source code. in the upload step qmake uses avrdude tool to upload the resulted .hex file to the avr microcontroller you're using. ***If you don't want this step to be executed comment this line out (i.e precede it with a #)***
- 3. **AVR_TOOLCHAIN_DIR = ""**: Use this qmake variable to tell qmake where to find avr-gnu toolchain directory in your system. You can leave it empty ("") if you have avr-gnu toolchain binaries path registered in your system's environment variables
+ 3. **AVR_TOOLCHAIN_DIR = ""**: Use this qmake variable to tell qmake where to find avr-gnu toolchain directory in your system.
  4. **UPLOADER_DIR = ""**: use this qmake variable to tell qmake where your uploader (avrdude) binary lives in your system.
  5. **UPLOADER_PORT = ""**: Tell qmake you're connecting your programmer to which port.
 
