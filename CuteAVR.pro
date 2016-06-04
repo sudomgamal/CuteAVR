@@ -3,7 +3,7 @@ CONFIG = ""
 
 # Change this to match your AVR microcontroller's part number
 MCU = atmega328p
-#Comment this line (using #) if you don't want to upload the output '.hex' file after building
+#Comment the following line (using #) if you don't want to upload the output '.hex' file after building
 CONFIG += upload_hex
 #set the avr-gnu toolchain directory (dont use a path with spaces in it)
 AVR_TOOLCHAIN_DIR = ""
@@ -11,10 +11,17 @@ AVR_TOOLCHAIN_DIR = ""
 UPLOADER_DIR = C:\Arduino\hardware\tools\avr\bin
 #specify the serial port to which the programmer is connected
 UPLOADER_PORT = COM2
-#set optimization level *avr-gcc oprimazations levels can be one of (0, 1, 2, s)*
+#Set the baudrate of the programmer connection for avrdude
+UPLOADER_BAUD = 115200
+#Specify the programmer for avrdude
+UPLOADER_PROGRAMMER = arduino
+#Set the part number of the microcontroller for avrdude (sometimes avrdude uses different
+#part number from the actual part number of the microcontroller if it's the same, leave it unchanged)
+UPLOADER_PARTNO = $$MCU
+#set optimization level *avr-gcc oprimazation levels can be one of (0, 1, 2, s)*
 COMPILER_OPTIMATZTION_LEVEL = 1
-#Comment this line (using #) if you don't care to watch avr programs work
-CONFIG += show_progs_excution
+#Comment the following line (using #) if you don't care to watch avr programs work
+#CONFIG += show_progs_excution
 
 ##################################################################################################
 ################# YOU SHOULDN'T NEED TO MODIFY THIS FILE AFTER THIS LINE #########################
@@ -38,17 +45,14 @@ AVR_INC_DIR = $$AVR_TOOLCHAIN_DIR/avr/include
 AVRC        = "$$AVR_TOOLCHAIN_DIR/bin/avr-gcc"
 AVRCXX      = "$$AVR_TOOLCHAIN_DIR/bin/avr-g++"
 AVR_LINKER  = "$$AVR_TOOLCHAIN_DIR/bin/avr-gcc"
-AVRSTRIP    = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-strip"
-AVROBJCPY   = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-objcopy"
-AVROBJDUMP  = "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-objdump"
+AVRSTRIP    = "$${VERBOS}$$AVR_TOOLCHAIN_DIR/bin/avr-strip"
+AVROBJCPY   = "$${VERBOS}$$AVR_TOOLCHAIN_DIR/bin/avr-objcopy"
+AVROBJDUMP  = "$${VERBOS}$$AVR_TOOLCHAIN_DIR/bin/avr-objdump"
 AVRSIZE     = @echo "---------------------------------------------------------------" && \
-@echo "Size of each section (bytes):" && "$$AVR_TOOLCHAIN_DIR/bin/$${VERBOS}avr-size"
+@echo "Size of each section (bytes):" && "$${VERBOS}$$AVR_TOOLCHAIN_DIR/bin/avr-size"
 
 #setup the upload tool (avrdude)
 UPLOADER = $${UPLOADER_DIR}\avrdude.exe
-UPLOADER_BAUD = 115200
-UPLOADER_PROGRAMMER = arduino
-UPLOADER_PARTNO = $$MCU
 UPLOADER_ARGS = -c$$UPLOADER_PROGRAMMER -P$$UPLOADER_PORT -b$$UPLOADER_BAUD -p$$UPLOADER_PARTNO \
 -Uflash:w:"$$OUTPUT_HEX":i
 
