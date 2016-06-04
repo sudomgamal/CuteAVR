@@ -15,9 +15,12 @@ UPLOADER_PORT = COM2
 UPLOADER_BAUD = 115200
 #Specify the programmer for avrdude
 UPLOADER_PROGRAMMER = arduino
+
 #Set the part number of the microcontroller for avrdude (sometimes avrdude uses different
-#part number from the actual part number of the microcontroller if it's the same, leave it unchanged)
+#part number from the actual part number of the microcontroller)
+#leave the following line unchanged if the part numbers are equal.
 UPLOADER_PARTNO = $$MCU
+
 #set optimization level *avr-gcc oprimazation levels can be one of (0, 1, 2, s)*
 COMPILER_OPTIMATZTION_LEVEL = 1
 #Comment the following line (using #) if you don't care to watch avr programs work
