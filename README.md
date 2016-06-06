@@ -7,11 +7,11 @@ The main file in this repository is [CuteAVR.pro](https://github.com/eng-mg/Cute
  - [avrdude](http://savannah.nongnu.org/projects/avrdude/). (Optional)
 
 ##How to use it...
- 1. Open Qt creator and make new empty qmake project.
-   - Click *File menu* the click *New file or project* then choose *Other Project* then *Empty qmake project*. This will create an empty project which has an empty Qt project (.pro) file.
+ 1. Open Qt creator and make new "empty qmake project".
+   - Click *File menu* then click *New file or project* then choose *Other Project* then *Empty qmake project*. This will create an empty project which has an empty Qt project (.pro) file.
  2. Open [CuteAVR.pro](https://github.com/eng-mg/CuteAVR/blob/master/CuteAVR.pro) file in any text editor and copy it's contents to your empty Qt project (*.pro) file.
- 3. Change the contents of your .pro file to match your needs. Note that you need to run qmake everytime you change the .pro file to allow the changes to take effect.
- 4. Add C files and and header files to your new qt creator project as usual.
+ 3. Change the contents of your .pro file to match your needs. **Note that you need to run qmake everytime you change the .pro file to allow the changes to take effect**.
+ 4. Add C/header files to your new qt creator project as usual.
  5. Write code then build it *aaaaaaaaand Have Fun*.
 
 #### What you need to change in the .pro file
