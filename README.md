@@ -2,7 +2,7 @@
 The main file in this repository is [CuteAVR.pro](https://github.com/eng-mg/CuteAVR/blob/master/CuteAVR.pro) which allows you to write, build and/or deploy programs for AVR microcontrollers using [Qt creator IDE](https://www.qt.io/ide/).
 
 ###System requirements
- - [Qt framework](https://www.qt.io/download-open-source/): Only Qmake and [Qt creator](https://www.qt.io/ide/) is needed.
+ - [Qt framework](https://www.qt.io/download-open-source/): Only Qmake and [Qt creator](https://www.qt.io/ide/) are required.
  - [AVR GNU Toolchain](http://www.atmel.com/tools/atmelavrtoolchainforwindows.aspx).
  - [avrdude](http://savannah.nongnu.org/projects/avrdude/). (Optional)
 
