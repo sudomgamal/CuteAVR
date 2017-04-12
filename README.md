@@ -1,12 +1,12 @@
 # CuteAVR
 The main file in this repository is [CuteAVR.pro](https://github.com/eng-mg/CuteAVR/blob/master/CuteAVR.pro) which allows you to write, build and/or deploy programs for AVR microcontrollers using [Qt creator IDE](https://www.qt.io/ide/).
 
-###System requirements
+### System requirements
  - [Qt framework](https://www.qt.io/download-open-source/): Only Qmake and [Qt creator](https://www.qt.io/ide/) are required.
  - [AVR GNU Toolchain](http://www.atmel.com/tools/atmelavrtoolchainforwindows.aspx).
  - [avrdude](http://savannah.nongnu.org/projects/avrdude/). (Optional)
 
-##How to use it...
+## How to use it...
  1. Open Qt creator and make new "empty qmake project".
    - Click *File menu* then click *New file or project* then choose *Other Project* then *Empty qmake project*. This will create an empty project which has an empty Qt project (.pro) file.
  2. Open [CuteAVR.pro](https://github.com/eng-mg/CuteAVR/blob/master/CuteAVR.pro) file in any text editor and copy it's contents to your empty Qt project (*.pro) file.
